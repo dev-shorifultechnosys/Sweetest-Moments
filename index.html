@@ -1,0 +1,838 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sweet Delights - Premium Patisserie & Desserts</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script> window.FontAwesomeConfig = { autoReplaceSvg: 'nest'};</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdn.plot.ly/plotly-3.1.1.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300;400;500;600;700&family=Quicksand:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            pink: '#F8B7CD',
+                            pinkLight: '#FDEEF3',
+                            yellow: '#F4D35E',
+                            yellowLight: '#FEF9E3',
+                            blue: '#A0D2EB',
+                            blueLight: '#E3F4FC',
+                            green: '#B6E2D3',
+                            dark: '#2D2D2D',
+                            gray: '#888888'
+                        }
+                    },
+                    fontFamily: {
+                        heading: ['Fredoka', 'sans-serif'],
+                        body: ['Quicksand', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #f1f1f1; }
+        ::-webkit-scrollbar-thumb { background: #F8B7CD; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #ff9cb3; }
+        .font-heading { font-family: 'Fredoka', sans-serif; }
+        .font-body { font-family: 'Quicksand', sans-serif; }
+        
+        .blob-shape {
+            border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+        }
+        .marquee-container {
+            overflow: hidden;
+            white-space: nowrap;
+        }
+        .marquee-content {
+            display: inline-block;
+            animation: marquee 20s linear infinite;
+        }
+        @keyframes marquee {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+        .wave-bottom {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            overflow: hidden;
+            line-height: 0;
+            transform: rotate(180deg);
+        }
+        .wave-bottom svg {
+            position: relative;
+            display: block;
+            width: calc(100% + 1.3px);
+            height: 60px;
+        }
+        .wave-bottom .shape-fill {
+            fill: #FFFFFF;
+        }
+        .card-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+    </style>
+</head>
+<body class="font-body text-brand-dark bg-white antialiased">
+
+    <!-- Header -->
+    <header id="header" class="fixed w-full top-0 z-50 bg-white/90 backdrop-blur-md border-b border-brand-pink/20 transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <!-- Logo -->
+                <div class="flex-shrink-0 flex items-center gap-2 cursor-pointer">
+                    <div class="w-10 h-10 bg-brand-pink rounded-full flex items-center justify-center text-white text-xl">
+                        <i class="fa-solid fa-cookie-bite"></i>
+                    </div>
+                    <span class="font-heading text-2xl font-bold text-brand-dark">Sweet<span class="text-brand-pink">Delights</span></span>
+                </div>
+
+                <!-- Desktop Menu -->
+                <nav class="hidden md:flex space-x-8">
+                    <a href="#" class="text-brand-dark hover:text-brand-pink font-semibold transition-colors">Home</a>
+                    <a href="#shop" class="text-brand-dark hover:text-brand-pink font-medium transition-colors">Shop</a>
+                    <a href="#about" class="text-brand-dark hover:text-brand-pink font-medium transition-colors">About Us</a>
+                    <a href="#gallery" class="text-brand-dark hover:text-brand-pink font-medium transition-colors">Gallery</a>
+                    <a href="#contact" class="text-brand-dark hover:text-brand-pink font-medium transition-colors">Contact</a>
+                </nav>
+
+                <!-- Actions -->
+                <div class="flex items-center space-x-4">
+                    <button class="text-brand-dark hover:text-brand-pink transition-colors relative">
+                        <i class="fa-solid fa-shopping-cart text-xl"></i>
+                        <span class="absolute -top-2 -right-2 bg-brand-yellow text-brand-dark text-xs font-bold w-5 h-5 rounded-full flex items-center justify-center">3</span>
+                    </button>
+                    <a href="#shop" class="hidden md:inline-flex items-center justify-center px-6 py-2 border border-transparent text-sm font-bold rounded-full text-white bg-brand-pink hover:bg-red-300 transition-colors shadow-lg shadow-brand-pink/30">
+                        Order Now
+                    </a>
+                    <button class="md:hidden text-brand-dark text-2xl">
+                        <i class="fa-solid fa-bars"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="hero" class="relative pt-32 pb-20 lg:pt-40 lg:pb-32 overflow-hidden bg-brand-blueLight">
+        <!-- Abstract Background Shapes -->
+        <div class="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-bl from-white/50 to-transparent rounded-bl-[100px] -z-10"></div>
+        <div class="absolute top-20 left-10 text-brand-pink/10 text-9xl animate-pulse">
+            <i class="fa-solid fa-heart"></i>
+        </div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <!-- Text Content -->
+                <div class="space-y-8">
+                    <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white shadow-sm text-brand-pink font-bold text-sm uppercase tracking-wider">
+                        <i class="fa-solid fa-star"></i> Voted Best Bakery 2026
+                    </div>
+                    <h1 class="font-heading text-5xl lg:text-7xl font-bold leading-tight text-brand-dark">
+                        Experience the <br>
+                        <span class="text-brand-pink relative inline-block">
+                            Sweetest
+                            <svg class="absolute w-full h-3 -bottom-1 left-0 text-brand-yellow" viewBox="0 0 100 10" preserveAspectRatio="none">
+                                <path d="M0 5 Q 50 10 100 5" stroke="currentColor" stroke-width="8" fill="none" />
+                            </svg>
+                        </span>
+                        Moments
+                    </h1>
+                    <p class="text-lg text-brand-gray max-w-lg leading-relaxed">
+                        Handcrafted desserts made with love and the finest organic ingredients. From dreamy cupcakes to artisanal chocolates, we bake happiness daily.
+                    </p>
+                    <div class="flex flex-wrap gap-4">
+                        <a href="#shop" class="inline-flex items-center justify-center px-8 py-4 text-base font-bold rounded-full text-white bg-brand-pink hover:bg-red-300 transition-all shadow-lg shadow-brand-pink/40 transform hover:-translate-y-1">
+                            Browse Menu
+                        </a>
+                        <a href="#about" class="inline-flex items-center justify-center px-8 py-4 text-base font-bold rounded-full text-brand-dark bg-white border-2 border-brand-pink/20 hover:border-brand-pink transition-all">
+                            Our Story
+                        </a>
+                    </div>
+                    
+                    <!-- Mini Gallery -->
+                    <div class="pt-8 flex gap-4">
+                        <div class="w-20 h-20 rounded-2xl overflow-hidden shadow-md transform -rotate-6 border-2 border-white">
+                            <img class="w-full h-full object-cover" src="https://storage.googleapis.com/uxpilot-auth.appspot.com/46fcf7e52a-9a939bde0d724f31ab2d.png" alt="close up of a colorful gourmet cupcake with sprinkles, high quality" />
+                        </div>
+                        <div class="w-20 h-20 rounded-2xl overflow-hidden shadow-md transform rotate-3 border-2 border-white">
+                            <img class="w-full h-full object-cover" src="https://storage.googleapis.com/uxpilot-auth.appspot.com/57f9b7c171-bcd68ad9d44a411ede0e.png" alt="close up of artisanal chocolates in a box, luxury dessert" />
+                        </div>
+                        <div class="w-20 h-20 rounded-2xl overflow-hidden shadow-md transform -rotate-3 border-2 border-white">
+                            <img class="w-full h-full object-cover" src="https://storage.googleapis.com/uxpilot-auth.appspot.com/9f7f487d3b-ea27b4906fe55e2ef209.png" alt="close up of strawberry ice cream scoop, pastel colors" />
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Hero Image Composition -->
+                <div class="relative h-[600px] w-full">
+                    <div class="absolute inset-0 bg-brand-yellow/20 rounded-full blur-3xl transform scale-75"></div>
+                    <!-- Main Hero Image -->
+                    <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full h-full flex items-center justify-center">
+                         <img class="w-[110%] h-auto max-h-[650px] object-contain drop-shadow-2xl hover:scale-105 transition-transform duration-700" src="https://storage.googleapis.com/uxpilot-auth.appspot.com/4c5e60d76d-82b849b13e5af88e9b42.png" alt="large tiered birthday cake with pastel frosting, macarons, and edible flowers, whimsical style, isolated" />
+                    </div>
+                    
+                    <!-- Floating Badge -->
+                    <div class="absolute bottom-10 right-10 bg-white p-4 rounded-2xl shadow-xl animate-bounce" style="animation-duration: 3s;">
+                        <div class="flex items-center gap-3">
+                            <div class="bg-brand-green/20 p-2 rounded-full text-brand-green">
+                                <i class="fa-solid fa-leaf text-xl"></i>
+                            </div>
+                            <div>
+                                <p class="text-xs text-brand-gray font-bold uppercase">100% Organic</p>
+                                <p class="font-heading font-bold text-brand-dark">Fresh Ingredients</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Scrolling Marquee -->
+    <section id="marquee" class="bg-brand-pink py-4 relative overflow-hidden transform -skew-y-2 origin-top-left shadow-inner border-y-4 border-white">
+        <div class="marquee-container">
+            <div class="marquee-content font-heading text-2xl text-white font-bold tracking-wider uppercase flex gap-12 items-center">
+                <span><i class="fa-solid fa-star text-brand-yellow mr-2"></i> Freshly Baked Daily</span>
+                <span><i class="fa-solid fa-heart text-brand-yellow mr-2"></i> Handmade with Love</span>
+                <span><i class="fa-solid fa-truck-fast text-brand-yellow mr-2"></i> Fast Delivery</span>
+                <span><i class="fa-solid fa-mug-hot text-brand-yellow mr-2"></i> Premium Coffee</span>
+                <span><i class="fa-solid fa-gift text-brand-yellow mr-2"></i> Custom Gift Boxes</span>
+                <span><i class="fa-solid fa-star text-brand-yellow mr-2"></i> Freshly Baked Daily</span>
+                <span><i class="fa-solid fa-heart text-brand-yellow mr-2"></i> Handmade with Love</span>
+                <span><i class="fa-solid fa-truck-fast text-brand-yellow mr-2"></i> Fast Delivery</span>
+                <span><i class="fa-solid fa-mug-hot text-brand-yellow mr-2"></i> Premium Coffee</span>
+                <span><i class="fa-solid fa-gift text-brand-yellow mr-2"></i> Custom Gift Boxes</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-24 bg-white relative">
+        <div class="absolute top-0 left-0 w-32 h-32 bg-brand-yellow/10 rounded-full blur-2xl"></div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <span class="text-brand-pink font-bold tracking-widest uppercase text-sm">Our Passion</span>
+                <h2 class="font-heading text-4xl lg:text-5xl font-bold mt-2 text-brand-dark">Discover the Art of Baking</h2>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+                <!-- Image Grid -->
+                <div class="relative">
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="space-y-4 mt-8">
+                            <div class="h-64 rounded-3xl overflow-hidden">
+                                <img class="w-full h-full object-cover hover:scale-110 transition-transform duration-500" src="https://storage.googleapis.com/uxpilot-auth.appspot.com/a1a3d48e95-f3a985805389e95a0f5f.png" alt="pastry chef decorating a cake with cream, bright kitchen" />
+                            </div>
+                            <div class="bg-brand-yellow p-6 rounded-3xl text-center transform hover:-rotate-2 transition-transform">
+                                <h3 class="font-heading text-4xl font-bold text-white mb-1">25+</h3>
+                                <p class="text-white font-bold text-sm uppercase">Years of Magic</p>
+                            </div>
+                        </div>
+                        <div class="space-y-4">
+                            <div class="bg-brand-pink p-6 rounded-3xl text-center transform hover:rotate-2 transition-transform">
+                                <h3 class="font-heading text-4xl font-bold text-white mb-1">10k+</h3>
+                                <p class="text-white font-bold text-sm uppercase">Happy Customers</p>
+                            </div>
+                            <div class="h-64 rounded-3xl overflow-hidden">
+                                <img class="w-full h-full object-cover hover:scale-110 transition-transform duration-500" src="https://storage.googleapis.com/uxpilot-auth.appspot.com/030fd16a48-f869dd43e4b64b4aec22.png" alt="happy customers eating cupcakes in a bright cafe" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Content -->
+                <div class="space-y-6">
+                    <h3 class="font-heading text-3xl font-bold text-brand-dark">Solutions made for your sweet cravings</h3>
+                    <p class="text-brand-gray text-lg leading-relaxed">
+                        Our team is committed to delivering high-quality desserts tailored to your taste buds. With years of experience and a passion for excellence, we focus on creating flavors that truly make a difference. We believe in building strong relationships based on trust and sweet communication.
+                    </p>
+                    <ul class="space-y-3 mt-4">
+                        <li class="flex items-center gap-3 text-brand-dark font-medium">
+                            <i class="fa-solid fa-check-circle text-brand-green text-xl"></i>
+                            Premium Quality Ingredients
+                        </li>
+                        <li class="flex items-center gap-3 text-brand-dark font-medium">
+                            <i class="fa-solid fa-check-circle text-brand-green text-xl"></i>
+                            Custom Designs for Events
+                        </li>
+                        <li class="flex items-center gap-3 text-brand-dark font-medium">
+                            <i class="fa-solid fa-check-circle text-brand-green text-xl"></i>
+                            Artisan Chocolate Selection
+                        </li>
+                    </ul>
+
+                    <!-- Chart Section -->
+                    <div class="mt-8 bg-brand-pinkLight rounded-2xl p-6 border border-brand-pink/20">
+                        <h4 class="font-heading text-xl font-bold mb-4 text-brand-dark text-center">Customer Flavor Favorites</h4>
+                        <div id="flavorChart" class="h-[300px] w-full"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Categories / Services -->
+    <section id="categories" class="py-24 bg-brand-yellowLight">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <span class="text-brand-gray font-bold tracking-widest uppercase text-xs">Sweet & Simple</span>
+                <h2 class="font-heading text-4xl font-bold mt-2 text-brand-dark">Treats for Every Occasion</h2>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Card 1 -->
+                <div class="bg-white rounded-[40px] p-6 shadow-xl card-hover relative overflow-hidden group">
+                    <div class="absolute top-0 left-0 w-full h-32 bg-brand-pink/20 rounded-b-[50%] transform -translate-y-16 group-hover:bg-brand-pink/30 transition-colors"></div>
+                    <div class="relative z-10 flex flex-col items-center">
+                        <div class="h-48 w-full flex items-center justify-center mb-4">
+                            <img class="w-40 h-40 object-contain drop-shadow-xl transform group-hover:scale-110 transition-transform duration-300" src="https://storage.googleapis.com/uxpilot-auth.appspot.com/bc1d9971ee-9d13b0b93820e2422997.png" alt="single beautifully decorated cupcake with bunny ears fondant" />
+                        </div>
+                        <h3 class="font-heading text-2xl font-bold text-brand-dark mb-2">Custom Cakes</h3>
+                        <p class="text-center text-brand-gray text-sm mb-6">Perfect for birthdays, weddings, and special moments.</p>
+                        <div class="mt-auto flex items-center justify-between w-full px-4 pt-4 border-t border-gray-100">
+                            <span class="font-bold text-brand-pink text-lg">From $45.00</span>
+                            <button class="w-10 h-10 rounded-full bg-brand-dark text-white hover:bg-brand-pink transition-colors flex items-center justify-center">
+                                <i class="fa-solid fa-arrow-right"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="bg-white rounded-[40px] p-6 shadow-xl card-hover relative overflow-hidden group border-2 border-brand-blue/20">
+                    <div class="absolute top-0 left-0 w-full h-32 bg-brand-blue/20 rounded-b-[50%] transform -translate-y-16 group-hover:bg-brand-blue/30 transition-colors"></div>
+                    <div class="relative z-10 flex flex-col items-center">
+                        <div class="h-48 w-full flex items-center justify-center mb-4">
+                            <img class="w-40 h-40 object-contain drop-shadow-xl transform group-hover:scale-110 transition-transform duration-300" src="https://storage.googleapis.com/uxpilot-auth.appspot.com/4e701134af-c9c6fe6e497ae3882d6b.png" alt="stack of colorful french macarons" />
+                        </div>
+                        <h3 class="font-heading text-2xl font-bold text-brand-dark mb-2">French Macarons</h3>
+                        <p class="text-center text-brand-gray text-sm mb-6">Delicate almond cookies with creamy ganache fillings.</p>
+                        <div class="mt-auto flex items-center justify-between w-full px-4 pt-4 border-t border-gray-100">
+                            <span class="font-bold text-brand-blue text-lg">From $25.00</span>
+                            <button class="w-10 h-10 rounded-full bg-brand-blue text-white hover:bg-brand-dark transition-colors flex items-center justify-center">
+                                <i class="fa-solid fa-arrow-right"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="bg-white rounded-[40px] p-6 shadow-xl card-hover relative overflow-hidden group">
+                    <div class="absolute top-0 left-0 w-full h-32 bg-brand-green/20 rounded-b-[50%] transform -translate-y-16 group-hover:bg-brand-green/30 transition-colors"></div>
+                    <div class="relative z-10 flex flex-col items-center">
+                        <div class="h-48 w-full flex items-center justify-center mb-4">
+                            <img class="w-40 h-40 object-contain drop-shadow-xl transform group-hover:scale-110 transition-transform duration-300" src="https://storage.googleapis.com/uxpilot-auth.appspot.com/a19b93fd8e-d1162bebfe43eb2232fa.png" alt="gourmet artisan chocolate truffles box" />
+                        </div>
+                        <h3 class="font-heading text-2xl font-bold text-brand-dark mb-2">Artisan Chocolates</h3>
+                        <p class="text-center text-brand-gray text-sm mb-6">Hand-painted bonbons and rich truffle collections.</p>
+                        <div class="mt-auto flex items-center justify-between w-full px-4 pt-4 border-t border-gray-100">
+                            <span class="font-bold text-brand-green text-lg">From $30.00</span>
+                            <button class="w-10 h-10 rounded-full bg-brand-dark text-white hover:bg-brand-green transition-colors flex items-center justify-center">
+                                <i class="fa-solid fa-arrow-right"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Stats Row -->
+            <div class="mt-20 flex flex-wrap justify-center gap-12 md:gap-24 items-center border-t border-brand-dark/5 pt-12">
+                <div class="text-center">
+                    <h4 class="font-heading text-5xl font-bold text-brand-dark mb-2">678</h4>
+                    <p class="text-sm font-bold text-brand-gray uppercase tracking-wide">Daily Orders</p>
+                </div>
+                <div class="text-center">
+                    <h4 class="font-heading text-5xl font-bold text-brand-dark mb-2">145</h4>
+                    <p class="text-sm font-bold text-brand-gray uppercase tracking-wide">Flavor Varieties</p>
+                </div>
+                <div class="text-center">
+                    <h4 class="font-heading text-5xl font-bold text-brand-dark mb-2">278</h4>
+                    <p class="text-sm font-bold text-brand-gray uppercase tracking-wide">5-Star Reviews</p>
+                </div>
+                <div class="flex -space-x-4">
+                    <img class="w-12 h-12 rounded-full border-4 border-brand-yellowLight object-cover" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQwLGMs0rN3kmPrzHe6GtSH-aTfBX7qRo2QyA&s" alt="User">
+                    <img class="w-12 h-12 rounded-full border-4 border-brand-yellowLight object-cover" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS-KwV5We0Bh6RjX-LfO7PfPwaAp1Uo8S3Vbw&s" alt="User">
+                    <img class="w-12 h-12 rounded-full border-4 border-brand-yellowLight object-cover" src="https://pbs.twimg.com/profile_images/922235061679693824/f0DpvumZ.jpg" alt="User">
+                    <div class="w-12 h-12 rounded-full border-4 border-brand-yellowLight bg-brand-pink text-white flex items-center justify-center font-bold text-xs">+2k</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Section (Yellow Theme) -->
+    <section id="featured" class="py-24 bg-white relative overflow-hidden">
+        <!-- Background Image Parallax Effect -->
+        <div class="absolute right-0 top-0 w-2/3 h-full overflow-hidden opacity-20 pointer-events-none">
+            <img class="w-full h-full object-cover" src="https://storage.googleapis.com/uxpilot-auth.appspot.com/522bf1e662-8d4f77a84e050fd4f333.png" alt="top view of many yellow macarons and lemon cookies pattern" />
+        </div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="flex flex-col lg:flex-row items-center">
+                <div class="lg:w-1/2 bg-white/90 backdrop-blur-sm p-12 rounded-[40px] shadow-2xl border border-brand-yellow/30">
+                    <span class="text-brand-yellow font-bold uppercase text-xs tracking-wider mb-2 block">Your Next Step</span>
+                    <h2 class="font-heading text-5xl font-bold text-brand-dark mb-6 leading-tight">
+                        Creative Ideas for <br>
+                        <span class="text-brand-yellow">Sweet People</span>
+                    </h2>
+                    <p class="text-brand-gray mb-8 text-lg">
+                        We believe in creating meaningful experiences through personalized service and attention to detail. Whether you're seeking guidance for a wedding cake or practical support for a corporate gift, our staff is here to help you.
+                    </p>
+                    <div class="flex gap-4 items-center">
+                        <a href="#contact" class="px-8 py-3 bg-brand-pink text-white font-bold rounded-full hover:bg-brand-dark transition-colors shadow-lg shadow-brand-pink/30">
+                            Book Consultation
+                        </a>
+                        <div class="flex items-center gap-2">
+                             <div class="w-10 h-10 rounded-full bg-brand-yellowLight flex items-center justify-center text-brand-yellow">
+                                <i class="fa-solid fa-play ml-1"></i>
+                             </div>
+                             <span class="font-bold text-brand-dark text-sm">Watch Process</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="lg:w-1/2 relative mt-12 lg:mt-0">
+                     <!-- Images floating -->
+                     <div class="relative w-full h-[500px]">
+                         <img class="absolute top-10 right-0 w-64 h-64 object-contain drop-shadow-2xl animate-bounce" style="animation-duration: 4s;" src="https://storage.googleapis.com/uxpilot-auth.appspot.com/b3355f7fbe-7882266c27e853f62c2f.png" alt="giant yellow macaron with lemon filling" />
+                         <img class="absolute bottom-0 left-10 w-72 h-72 object-contain drop-shadow-2xl animate-bounce" style="animation-duration: 5s;" src="https://storage.googleapis.com/uxpilot-auth.appspot.com/fd5504ea62-9135ba1c28308bb2a76e.png" alt="lemon meringue tart with toasted peaks" />
+                         <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white p-4 rounded-2xl shadow-lg flex items-center gap-3">
+                             <div class="bg-brand-yellow p-2 rounded-lg text-white">
+                                 <i class="fa-solid fa-medal"></i>
+                             </div>
+                             <div>
+                                 <p class="text-xs text-brand-gray">Award Winning</p>
+                                 <p class="font-bold text-brand-dark">Lemon Zest</p>
+                             </div>
+                         </div>
+                     </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Shop Grid -->
+    <section id="shop" class="py-24" style="background-color: #95cae6;">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <span class="text-white uppercase text-xs font-bold tracking-widest">Innovation Meets Design</span>
+                <h2 class="font-heading text-4xl font-bold text-white mt-2">Experience Quality at its Best</h2>
+            </div>
+            
+            <!-- Filter Tabs -->
+            <div class="flex justify-center gap-4 mb-12 flex-wrap">
+                <button class="px-6 py-2 rounded-full bg-white text-brand-dark font-bold shadow-lg">All</button>
+                <button class="px-6 py-2 rounded-full bg-white/80 text-brand-dark font-bold hover:bg-white hover:text-brand-pink transition-colors shadow-sm">Cakes</button>
+                <button class="px-6 py-2 rounded-full bg-white/80 text-brand-dark font-bold hover:bg-white hover:text-brand-pink transition-colors shadow-sm">Donuts</button>
+                <button class="px-6 py-2 rounded-full bg-white/80 text-brand-dark font-bold hover:bg-white hover:text-brand-pink transition-colors shadow-sm">Ice Cream</button>
+                <button class="px-6 py-2 rounded-full bg-white/80 text-brand-dark font-bold hover:bg-white hover:text-brand-pink transition-colors shadow-sm">Gifts</button>
+            </div>
+
+            <!-- Product Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <!-- Product 1 -->
+                <div class="bg-white rounded-3xl p-4 shadow-lg hover:shadow-2xl transition-all duration-300 group">
+                    <div class="relative h-64 rounded-2xl overflow-hidden mb-4 bg-gray-50 flex items-center justify-center">
+                        <img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" src="https://storage.googleapis.com/uxpilot-auth.appspot.com/ebacfc101f-23f1dd0709b38d0be8ae.png" alt="box of assorted colorful donuts" />
+                        <div class="absolute top-3 right-3 bg-white text-brand-pink font-bold text-xs px-3 py-1 rounded-full shadow-sm">New</div>
+                        <button class="absolute bottom-3 right-3 w-10 h-10 bg-brand-pink text-white rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transform translate-y-4 group-hover:translate-y-0 transition-all duration-300 shadow-lg">
+                            <i class="fa-solid fa-plus"></i>
+                        </button>
+                    </div>
+                    <div class="flex justify-between items-end">
+                        <div>
+                            <p class="text-xs text-brand-gray font-bold mb-1">Donuts</p>
+                            <h3 class="font-heading text-lg font-bold text-brand-dark">The Simple One</h3>
+                        </div>
+                        <span class="font-bold text-brand-pink text-xl">$15</span>
+                    </div>
+                </div>
+
+                <!-- Product 2 -->
+                <div class="bg-white rounded-3xl p-4 shadow-lg hover:shadow-2xl transition-all duration-300 group">
+                    <div class="relative h-64 rounded-2xl overflow-hidden mb-4 bg-gray-50 flex items-center justify-center">
+                        <img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" src="https://storage.googleapis.com/uxpilot-auth.appspot.com/baaf70f4b1-97f688f4c1623c151493.png" alt="elegant strawberry shortcake on stand" />
+                        <button class="absolute bottom-3 right-3 w-10 h-10 bg-brand-pink text-white rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transform translate-y-4 group-hover:translate-y-0 transition-all duration-300 shadow-lg">
+                            <i class="fa-solid fa-plus"></i>
+                        </button>
+                    </div>
+                    <div class="flex justify-between items-end">
+                        <div>
+                            <p class="text-xs text-brand-gray font-bold mb-1">Cakes</p>
+                            <h3 class="font-heading text-lg font-bold text-brand-dark">Essential Pack</h3>
+                        </div>
+                        <span class="font-bold text-brand-yellow text-xl">$45</span>
+                    </div>
+                </div>
+
+                <!-- Product 3 -->
+                <div class="bg-white rounded-3xl p-4 shadow-lg hover:shadow-2xl transition-all duration-300 group">
+                    <div class="relative h-64 rounded-2xl overflow-hidden mb-4 bg-gray-50 flex items-center justify-center">
+                        <img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" src="https://storage.googleapis.com/uxpilot-auth.appspot.com/a8052f3e51-f98893a3cd5b53f85faf.png" alt="gourmet chocolate easter egg with filling" />
+                        <button class="absolute bottom-3 right-3 w-10 h-10 bg-brand-pink text-white rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transform translate-y-4 group-hover:translate-y-0 transition-all duration-300 shadow-lg">
+                            <i class="fa-solid fa-plus"></i>
+                        </button>
+                    </div>
+                    <div class="flex justify-between items-end">
+                        <div>
+                            <p class="text-xs text-brand-gray font-bold mb-1">Seasonal</p>
+                            <h3 class="font-heading text-lg font-bold text-brand-dark">Classic Set</h3>
+                        </div>
+                        <span class="font-bold text-brand-green text-xl">$34</span>
+                    </div>
+                </div>
+
+                <!-- Product 4 -->
+                <div class="bg-white rounded-3xl p-4 shadow-lg hover:shadow-2xl transition-all duration-300 group">
+                    <div class="relative h-64 rounded-2xl overflow-hidden mb-4 bg-gray-50 flex items-center justify-center">
+                        <img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" src="https://storage.googleapis.com/uxpilot-auth.appspot.com/10c5606f27-4d2cecdd24dc0a9ae167.png" alt="mint chocolate chip ice cream in waffle cone" />
+                        <div class="absolute top-3 right-3 bg-red-400 text-white font-bold text-xs px-3 py-1 rounded-full shadow-sm">-20%</div>
+                        <button class="absolute bottom-3 right-3 w-10 h-10 bg-brand-pink text-white rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transform translate-y-4 group-hover:translate-y-0 transition-all duration-300 shadow-lg">
+                            <i class="fa-solid fa-plus"></i>
+                        </button>
+                    </div>
+                    <div class="flex justify-between items-end">
+                        <div>
+                            <p class="text-xs text-brand-gray font-bold mb-1">Ice Cream</p>
+                            <h3 class="font-heading text-lg font-bold text-brand-dark">Cool Mint</h3>
+                        </div>
+                        <span class="font-bold" style="color: #95cae6;">$8</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="text-center mt-12">
+                <a href="#" class="inline-flex items-center gap-2 text-white font-bold hover:text-brand-dark transition-colors">
+                    View All Products <i class="fa-solid fa-arrow-right-long"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section id="gallery" class="py-24 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <span class="text-brand-gray font-bold tracking-widest uppercase text-xs">Visual Feast</span>
+                <h2 class="font-heading text-4xl lg:text-5xl font-bold mt-2 text-brand-dark">Our Sweet Gallery</h2>
+                <p class="text-brand-gray mt-4 max-w-2xl mx-auto">Explore our handcrafted creations - from elegant cakes to artisan chocolates, refreshing ice cream to luxurious gift boxes</p>
+            </div>
+
+            <!-- Gallery Grid -->
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                <!-- Row 1 -->
+                <div class="col-span-2 row-span-2 relative rounded-3xl overflow-hidden group cursor-pointer shadow-lg">
+                    <img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" src="https://i.pinimg.com/736x/c1/72/f5/c172f57661f74fb74cfbf908fa7ddb63.jpg" alt="luxurious three tier wedding cake with gold details and fresh flowers" />
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
+                        <div class="text-white">
+                            <h3 class="font-heading text-2xl font-bold mb-1">Custom Cakes</h3>
+                            <p class="text-sm">Perfect for special occasions</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="relative rounded-3xl overflow-hidden group cursor-pointer shadow-lg">
+                    <img class="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-700" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTDKS9owjmftuzqTPR81FdpbK5MiQdrLMAHWA&s" alt="colorful ice cream scoops in waffle cones" />
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
+                        <div class="text-white">
+                            <h3 class="font-heading text-lg font-bold">Ice Cream</h3>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="relative rounded-3xl overflow-hidden group cursor-pointer shadow-lg">
+                    <img class="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-700" src="https://ae01.alicdn.com/kf/H5a629fcd717c47e5805d1f5a3ed8e4179.png" alt="luxury chocolate gift box with ribbon" />
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
+                        <div class="text-white">
+                            <h3 class="font-heading text-lg font-bold">Gift Boxes</h3>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Row 2 -->
+                <div class="relative rounded-3xl overflow-hidden group cursor-pointer shadow-lg">
+                    <img class="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-700" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ8kZJLK2ti5VdQnY6BIBCXP_q1xDJt9tP8mg&s" alt="assorted artisan chocolates and truffles" />
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
+                        <div class="text-white">
+                            <h3 class="font-heading text-lg font-bold">Chocolates</h3>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="relative rounded-3xl overflow-hidden group cursor-pointer shadow-lg">
+                    <img class="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-700" src="https://thumbs.dreamstime.com/b/french-macaroons-blue-background-63143465.jpg" alt="colorful macarons display" />
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
+                        <div class="text-white">
+                            <h3 class="font-heading text-lg font-bold">Macarons</h3>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Row 3 -->
+                <div class="relative rounded-3xl overflow-hidden group cursor-pointer shadow-lg">
+                    <img class="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-700" src="https://i.ytimg.com/vi/OMa4823aC6g/maxresdefault.jpg" alt="fresh fruit tarts with glazed berries" />
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
+                        <div class="text-white">
+                            <h3 class="font-heading text-lg font-bold">Tarts</h3>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-span-2 relative rounded-3xl overflow-hidden group cursor-pointer shadow-lg">
+                    <img class="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-700" src="https://media.gettyimages.com/id/1672648735/video/a-nice-sweet-table-macarons-small-snacks-sandwiches-pink-hamburgers-sweets-cookies-cupcakes-a.jpg?s=640x640&k=20&c=KrP8CN4PY5eLsMXoWsK3HlKMyOxYb-QriUcswfLaP48=" alt="elegant dessert table with various pastries and cakes" />
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
+                        <div class="text-white">
+                            <h3 class="font-heading text-2xl font-bold mb-1">Dessert Tables</h3>
+                            <p class="text-sm">Complete event packages</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="relative rounded-3xl overflow-hidden group cursor-pointer shadow-lg">
+                    <img class="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-700" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSx3KZAiBa_IvEH4KqM3amwD2up96jXF8FaIw&s" alt="gourmet cupcakes with decorative frosting" />
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
+                        <div class="text-white">
+                            <h3 class="font-heading text-lg font-bold">Cupcakes</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="text-center mt-12">
+                <a href="#" class="inline-flex items-center gap-2 px-8 py-3 bg-brand-pink text-white font-bold rounded-full hover:bg-brand-dark transition-colors shadow-lg shadow-brand-pink/30">
+                    View Full Gallery <i class="fa-solid fa-images"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonial / Trust Section -->
+    <section id="testimonials" class="py-24 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+                <!-- Text -->
+                <div>
+                    <span class="text-brand-gray uppercase text-xs font-bold tracking-widest">What We Do</span>
+                    <h2 class="font-heading text-4xl lg:text-5xl font-bold text-brand-dark mt-2 mb-6">Designed to make life easier</h2>
+                    <p class="text-brand-gray text-lg mb-8">
+                        We pride ourselves on offering personalized support that helps you reach your sweet goals. Every project is approached with dedication.
+                    </p>
+
+                    <div class="grid grid-cols-2 gap-y-6 gap-x-4">
+                        <div class="flex items-start gap-3">
+                            <div class="w-10 h-10 rounded-full bg-brand-blueLight flex items-center justify-center text-brand-blue flex-shrink-0">
+                                <i class="fa-solid fa-cookie"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-heading font-bold text-brand-dark">Carefully Crafted</h4>
+                                <p class="text-xs text-brand-gray">Handmade details</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-3">
+                            <div class="w-10 h-10 rounded-full bg-brand-pinkLight flex items-center justify-center text-brand-pink flex-shrink-0">
+                                <i class="fa-solid fa-medal"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-heading font-bold text-brand-dark">High Quality</h4>
+                                <p class="text-xs text-brand-gray">Best ingredients</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-3">
+                            <div class="w-10 h-10 rounded-full bg-brand-yellowLight flex items-center justify-center text-brand-yellow flex-shrink-0">
+                                <i class="fa-solid fa-star"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-heading font-bold text-brand-dark">Premium Exp.</h4>
+                                <p class="text-xs text-brand-gray">Top service</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-3">
+                            <div class="w-10 h-10 rounded-full bg-brand-green/20 flex items-center justify-center text-brand-green flex-shrink-0">
+                                <i class="fa-solid fa-user-shield"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-heading font-bold text-brand-dark">Trusted Support</h4>
+                                <p class="text-xs text-brand-gray">Expert team</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <button class="mt-8 px-8 py-3 bg-brand-pink text-white font-bold rounded-full hover:bg-brand-dark transition-colors shadow-lg shadow-brand-pink/30">
+                        See More
+                    </button>
+                </div>
+
+                <!-- Image -->
+                <div class="relative">
+                    <div class="absolute inset-0 bg-brand-pinkLight rounded-[50px] transform rotate-3"></div>
+                    <div class="relative rounded-[50px] overflow-hidden shadow-2xl h-[500px]">
+                        <img class="w-full h-full object-cover" src="https://storage.googleapis.com/uxpilot-auth.appspot.com/0d29d388be-0a0a417b3bb395c67e49.png" alt="cute bunny themed cake with white fondant and pink ears, party setting" />
+                        <div class="absolute bottom-0 left-0 w-full bg-white/90 backdrop-blur-md p-6 flex justify-between items-center border-t border-brand-pink/20">
+                            <div>
+                                <h4 class="font-heading text-4xl font-bold text-brand-dark">82</h4>
+                                <p class="text-xs font-bold uppercase text-brand-gray">Awards Won</p>
+                            </div>
+                            <div class="text-right">
+                                <div class="text-brand-yellow text-sm mb-1">
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-solid fa-star"></i>
+                                </div>
+                                <p class="text-sm text-brand-dark font-bold">"Your success is our mission"</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Blog / News Section -->
+    <section id="blog" class="py-24 bg-brand-blueLight/20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="font-heading text-5xl font-bold text-center text-brand-dark mb-16">Join Now</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Article 1 -->
+                <div class="group cursor-pointer">
+                    <div class="h-80 rounded-3xl overflow-hidden mb-6 relative">
+                        <img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" src="https://storage.googleapis.com/uxpilot-auth.appspot.com/6a69acb7cc-5b25c162fa3623b1ea49.png" alt="woman enjoying a cupcake in a cafe" />
+                        <div class="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors"></div>
+                    </div>
+                    <div class="text-center px-4">
+                        <p class="text-xs font-bold text-brand-gray uppercase mb-2">Explore Our World</p>
+                        <h3 class="font-heading text-2xl font-bold text-brand-dark group-hover:text-brand-pink transition-colors">Make the Most of It</h3>
+                    </div>
+                </div>
+
+                <!-- Article 2 -->
+                <div class="group cursor-pointer mt-12 md:mt-0">
+                    <div class="h-96 rounded-3xl overflow-hidden mb-6 relative shadow-xl">
+                         <img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" src="https://storage.googleapis.com/uxpilot-auth.appspot.com/4b058c3af4-7011f142f735a6bd22f6.png" alt="close up of easter bread kulich with icing" />
+                    </div>
+                    <div class="text-center px-4">
+                        <p class="text-xs font-bold text-brand-gray uppercase mb-2">Tips & Tricks</p>
+                        <h3 class="font-heading text-2xl font-bold text-brand-dark group-hover:text-brand-pink transition-colors">5 Tips You Should Know</h3>
+                    </div>
+                </div>
+
+                <!-- Article 3 -->
+                <div class="group cursor-pointer">
+                    <div class="h-80 rounded-3xl overflow-hidden mb-6 relative">
+                        <img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" src="https://storage.googleapis.com/uxpilot-auth.appspot.com/5fec9614c5-f9cab62ff48f0259c52a.png" alt="assorted small cakes on a stand" />
+                        <div class="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors"></div>
+                    </div>
+                    <div class="text-center px-4">
+                        <p class="text-xs font-bold text-brand-gray uppercase mb-2">Smart & Simple</p>
+                        <h3 class="font-heading text-2xl font-bold text-brand-dark group-hover:text-brand-pink transition-colors">Why Quality Always Wins</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer CTA -->
+    <section class="py-0 relative h-96 overflow-hidden">
+        <img class="absolute inset-0 w-full h-full object-cover" src="https://storage.googleapis.com/uxpilot-auth.appspot.com/daad045e90-89eb1ba7c9ddf1e7520a.png" alt="flat lay of various cookies and baking ingredients on wooden table" />
+        <div class="absolute inset-0 bg-black/40"></div>
+        <div class="relative z-10 h-full flex flex-col items-center justify-center text-center px-4">
+            <h2 class="font-heading text-4xl md:text-5xl font-bold text-white mb-6">Get inspired and <br> stay ahead</h2>
+            <button class="px-8 py-3 bg-brand-pink text-white font-bold rounded-full hover:bg-white hover:text-brand-pink transition-colors shadow-lg">
+                Subscribe Now
+            </button>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact" class="pt-20 pb-10" style="background: linear-gradient(135deg, #95cae6 0%, #7ab8d9 100%);">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row justify-between items-center mb-16">
+                <div class="mb-8 md:mb-0 text-center md:text-left">
+                    <h2 class="font-heading text-4xl font-bold text-white drop-shadow-md">Experience quality <br> at its best</h2>
+                </div>
+                
+                <div class="flex gap-12 text-center md:text-left">
+                    <div>
+                        <h4 class="font-heading font-bold text-white text-lg mb-4 drop-shadow-sm">Address:</h4>
+                        <p class="text-white/80 text-sm leading-relaxed">
+                            123 Sweet Street<br>
+                            Candy Lane, FL 33100<br>
+                            USA
+                        </p>
+                        <div class="flex gap-4 mt-4 justify-center md:justify-start">
+                            <a href="#" class="text-white hover:text-brand-dark transition-colors"><i class="fa-brands fa-facebook"></i></a>
+                            <a href="#" class="text-white hover:text-brand-dark transition-colors"><i class="fa-brands fa-twitter"></i></a>
+                            <a href="#" class="text-white hover:text-brand-dark transition-colors"><i class="fa-brands fa-instagram"></i></a>
+                        </div>
+                    </div>
+                    <div>
+                        <h4 class="font-heading font-bold text-white text-lg mb-4 drop-shadow-sm">Contact</h4>
+                        <p class="text-white/80 text-sm mb-2">support@sweetdelights.com</p>
+                        <p class="font-heading text-2xl font-bold text-white">+ 0000000</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="border-t border-white/30 pt-8 flex flex-col md:flex-row justify-between items-center text-xs text-white/70">
+                <div class="flex gap-6 mb-4 md:mb-0">
+                    <a href="#" class="hover:text-white">Partnerships</a>
+                    <a href="#" class="hover:text-white">Customer Support</a>
+                    <a href="#" class="hover:text-white">Privacy Policy</a>
+                </div>
+                <div class="flex gap-4">
+                    <i class="fa-brands fa-cc-stripe text-xl"></i>
+                    <i class="fa-brands fa-cc-visa text-xl"></i>
+                    <i class="fa-brands fa-cc-mastercard text-xl"></i>
+                    <i class="fa-brands fa-cc-paypal text-xl"></i>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Chart Initialization
+        window.addEventListener('load', function() {
+            try {
+                var data = [{
+                    values: [35, 25, 20, 20],
+                    labels: ['Chocolate Bliss', 'Vanilla Bean', 'Red Velvet', 'Lemon Zest'],
+                    type: 'pie',
+                    hole: .4,
+                    marker: {
+                        colors: ['#F8B7CD', '#F4D35E', '#B6E2D3', '#A0D2EB']
+                    },
+                    textinfo: 'label+percent',
+                    hoverinfo: 'label+percent',
+                    textposition: 'inside',
+                    automargin: true
+                }];
+
+                var layout = {
+                    showlegend: false,
+                    height: 300,
+                    margin: { t: 0, b: 0, l: 0, r: 0 },
+                    paper_bgcolor: 'rgba(0,0,0,0)',
+                    plot_bgcolor: 'rgba(0,0,0,0)',
+                    font: { family: 'Quicksand' }
+                };
+
+                var config = {responsive: true, displayModeBar: false};
+
+                Plotly.newPlot('flavorChart', data, layout, config);
+            } catch(e) {
+                console.error("Chart failed to load", e);
+            }
+        });
+    </script>
+</body>
+</html>
